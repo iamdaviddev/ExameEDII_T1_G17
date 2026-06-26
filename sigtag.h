@@ -14,25 +14,25 @@
 #define MAX_AMOSTRAS   200
 #define NUM_OPCOES     13
 
-/* ESTRUTURA: AMOSTRA GEOLÓGICA */
+/* Struct Amostra Geológica */
 typedef struct {
     int    codigo;
     char   nome[MAX_NOME];
     char   local_extracao[MAX_LOCAL];
     char   mineral[MAX_MINERAL];
-    float  teor;          /* teor mineral em % */
-    int    prioridade;    /* 1=alta, 2=media, 3=baixa */
-    char   data[12];      /* DD/MM/AAAA */
+    float  teor;
+    int    prioridade;
+    char   data[12];
 } Amostra;
 
-/* BST — ÁRVORE BINÁRIA DE BUSCA */
+/* Struct BST */
 typedef struct NoBST {
     Amostra        amostra;
     struct NoBST  *esq;
     struct NoBST  *dir;
 } NoBST;
 
-/* AVL — ÁRVORE AVL */
+/* Struct AVL */
 typedef struct NoAVL {
     Amostra        amostra;
     struct NoAVL  *esq;
@@ -52,17 +52,17 @@ typedef struct {
 typedef struct {
     int origem;
     int destino;
-    int peso;   /* distância em km */
+    int peso;
 } Aresta;
 
 typedef struct {
     Ponto  pontos[MAX_NOS_GRAFO];
-    int    adj[MAX_NOS_GRAFO][MAX_NOS_GRAFO]; /* -1 = sem ligação */
-    int    num_pontos;
-    int    num_arestas;
+    int    adj[MAX_NOS_GRAFO][MAX_NOS_GRAFO];
+    int    n_pontos;
+    int    n_arestas;
 } Grafo;
 
-/* SISTEMA DE MENU ADAPTATIVO */
+/* Sistema de Menu Adaptativo */
 typedef struct {
     int  id;
     char descricao[MAX_NOME];
@@ -73,15 +73,15 @@ typedef struct {
     OpcaoMenu opcoes[NUM_OPCOES];
 } MenuAdaptativo;
 
-/* ESTADO GLOBAL DO SISTEMA */
+/* Struct do Sistema */
 typedef struct {
-    NoBST        *raiz_bst;
-    NoAVL        *raiz_avl;
+    NoBST        *root_bst;
+    NoAVL        *root_avl;
     Grafo         grafo;
     MenuAdaptativo menu;
-    Amostra       lista[MAX_AMOSTRAS];  /* lista plana p/ ordenação */
+    Amostra       lista[MAX_AMOSTRAS];
     int           total_amostras;
-    long long     comp_bst;   /* contadores de desempenho */
+    long long     comp_bst;
     long long     comp_avl;
     long long     comp_bubble;
     long long     comp_selection;
@@ -89,14 +89,14 @@ typedef struct {
     long long     trocas_selection;
 } Sistema;
 
-/* PROTÓTIPOS — BST */
+/* BST */
 NoBST* bst_inserir(NoBST *raiz, Amostra a, long long *comp);
 NoBST* bst_buscar(NoBST *raiz, int codigo, long long *comp);
 NoBST* bst_remover(NoBST *raiz, int codigo, long long *comp);
 void   bst_emordem(NoBST *raiz, Amostra *out, int *idx);
 void   bst_destruir(NoBST *raiz);
 
-/* PROTÓTIPOS — AVL */
+/* AVL */
 NoAVL* avl_inserir(NoAVL *raiz, Amostra a, long long *comp);
 NoAVL* avl_buscar(NoAVL *raiz, int codigo, long long *comp);
 NoAVL* avl_remover(NoAVL *raiz, int codigo, long long *comp);
@@ -104,44 +104,44 @@ void   avl_emordem(NoAVL *raiz, Amostra *out, int *idx);
 void   avl_destruir(NoAVL *raiz);
 int    avl_altura(NoAVL *no);
 
-/* PROTÓTIPOS — ORDENAÇÃO */
+/* ORDENAÇÃO */
 void bubble_sort_teor(Amostra *arr, int n, long long *comp, long long *trocas);
 void selection_sort_prioridade(Amostra *arr, int n, long long *comp, long long *trocas);
 
-/* PROTÓTIPOS — GRAFO */
-void grafo_init(Grafo *g);
-int  grafo_add_ponto(Grafo *g, const char *nome, TipoPonto tipo);
-void grafo_add_aresta(Grafo *g, int orig, int dest, int peso);
-void grafo_dijkstra(Grafo *g, int origem, int destino, int *caminho, int *tam_caminho, int *distancia);
-void grafo_imprimir(Grafo *g);
+/* GRAFO */
+void giniciar(Grafo *g);
+int  gadd_ponto(Grafo *g, const char *nome, TipoPonto tipo);
+void gadd_aresta(Grafo *g, int orig, int dest, int peso);
+void gdijkstra(Grafo *g, int origem, int destino, int *caminho, int *tam_caminho, int *distancia);
+void gimprimir(Grafo *g);
 
-/* PROTÓTIPOS — MENU */
-void menu_init(MenuAdaptativo *m);
+/* MENU */
+void menu_iniciar(MenuAdaptativo *m);
 void menu_registar_uso(MenuAdaptativo *m, int id);
 void menu_ordenar(MenuAdaptativo *m);
-void menu_exibir(MenuAdaptativo *m);
+void menu_imprimir(MenuAdaptativo *m);
 
-/* PROTÓTIPOS — SISTEMA */
-void sistema_init(Sistema *s);
-void sistema_popular_demo(Sistema *s);
-void sistema_executar(Sistema *s);
-void sistema_inserir_amostra(Sistema *s);
-void sistema_buscar_amostra(Sistema *s);
-void sistema_remover_amostra(Sistema *s);
-void sistema_listar_inorder(Sistema *s);
-void sistema_ordenar_bubble(Sistema *s);
-void sistema_ordenar_selection(Sistema *s);
-void sistema_comparar_arvores(Sistema *s);
-void sistema_comparar_ordenacao(Sistema *s);
-void sistema_add_ponto_grafo(Sistema *s);
-void sistema_calcular_rota(Sistema *s);
-void sistema_sugerir_estrutura(Sistema *s);
-void sistema_ver_estatisticas(Sistema *s);
+/* SISTEMA */
+void iniciar(Sistema *s);
+void popular_demo(Sistema *s);
+void executar(Sistema *s);
+void inserir_amostra(Sistema *s);
+void buscar_amostra(Sistema *s);
+void remover_amostra(Sistema *s);
+void listar_inorder(Sistema *s);
+void ordenar_bubble(Sistema *s);
+void ordenar_selection(Sistema *s);
+void comparar_arvores(Sistema *s);
+void comparar_ordenacao(Sistema *s);
+void add_ponto_grafo(Sistema *s);
+void calcular_rota(Sistema *s);
+void sugerir_estrutura(Sistema *s);
+void ver_estatisticas(Sistema *s);
 
-/* PROTÓTIPOS — FICHEIROS */
-int  ficheiro_ler_amostras(const char *caminho, Amostra *arr, int max);
-void ficheiro_ler_grafo(const char *caminho, Grafo *g);
-void ficheiro_escrever_relatorio(const char *caminho, Sistema *s);
+/* FICHEIROS */
+int  ler_amostras(const char *caminho, Amostra *arr, int max);
+void ler_grafo(const char *caminho, Grafo *g);
+void escrever_relatorio(const char *caminho, Sistema *s);
 
 /* UTILITÁRIOS */
 void limpar_tela(void);

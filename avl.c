@@ -1,8 +1,4 @@
-#include "include/sigtag.h"
-
-/* ======================================================
-   AVL — ÁRVORE AUTOBALANCEADA
-   ====================================================== */
+#include "sigtag.h"
 
 int avl_altura(NoAVL *no) {
     return no ? no->altura : 0;
@@ -21,14 +17,16 @@ static void atualizar_altura(NoAVL *no) {
 
 static NoAVL* novo_no_avl(Amostra a) {
     NoAVL *no = (NoAVL*)malloc(sizeof(NoAVL));
-    if (!no) { fprintf(stderr, "Erro: sem memória (AVL)\n"); exit(1); }
+    if (!no) {
+        fprintf(stderr, "Erro: sem memória (AVL)\n");
+        exit(1);
+    }
     no->amostra = a;
     no->esq = no->dir = NULL;
     no->altura = 1;
     return no;
 }
 
-/* Rotação simples à direita */
 static NoAVL* rotacao_direita(NoAVL *y) {
     NoAVL *x  = y->esq;
     NoAVL *T2 = x->dir;
@@ -39,7 +37,6 @@ static NoAVL* rotacao_direita(NoAVL *y) {
     return x;
 }
 
-/* Rotação simples à esquerda */
 static NoAVL* rotacao_esquerda(NoAVL *x) {
     NoAVL *y  = x->dir;
     NoAVL *T2 = y->esq;
@@ -54,18 +51,14 @@ static NoAVL* balancear(NoAVL *no) {
     atualizar_altura(no);
     int fb = fator_balanceamento(no);
 
-    /* Caso LL */
     if (fb > 1 && fator_balanceamento(no->esq) >= 0)
         return rotacao_direita(no);
-    /* Caso LR */
     if (fb > 1 && fator_balanceamento(no->esq) < 0) {
         no->esq = rotacao_esquerda(no->esq);
         return rotacao_direita(no);
     }
-    /* Caso RR */
     if (fb < -1 && fator_balanceamento(no->dir) <= 0)
         return rotacao_esquerda(no);
-    /* Caso RL */
     if (fb < -1 && fator_balanceamento(no->dir) > 0) {
         no->dir = rotacao_direita(no->dir);
         return rotacao_esquerda(no);
@@ -81,7 +74,7 @@ NoAVL* avl_inserir(NoAVL *raiz, Amostra a, long long *comp) {
     else if (a.codigo > raiz->amostra.codigo)
         raiz->dir = avl_inserir(raiz->dir, a, comp);
     else
-        return raiz; /* duplicado */
+        return raiz;
     return balancear(raiz);
 }
 

@@ -1,0 +1,18 @@
+# FICHEIRO DE ENTRADA — REDE LOGÍSTICA — SIGTAG
+# PONTOS: ID|NOME|TIPO  (0=Extracao, 1=Laboratorio, 2=Exportacao)
+PONTO|0|Luanda (Lab. Central)|1
+PONTO|1|Malanje (Extracao)|0
+PONTO|2|Benguela (Extracao)|0
+PONTO|3|Huambo (Lab. Regional)|1
+PONTO|4|Lubango (Extracao)|0
+PONTO|5|Cabinda (Exportacao)|2
+PONTO|6|Lobito (Exportacao)|2
+# ARESTAS: ORIGEM|DESTINO|DISTANCIA_KM
+ARESTA|1|0|350
+ARESTA|0|5|600
+ARESTA|0|2|500
+ARESTA|2|3|180
+ARESTA|3|4|250
+ARESTA|2|6|30
+ARESTA|1|3|430
+ARESTA|4|6|340

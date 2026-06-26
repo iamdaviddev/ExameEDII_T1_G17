@@ -1,0 +1,37 @@
+=============================================================
+  SIGTAG â€” Relatorio de Saida
+  Gerado automaticamente pelo sistema
+=============================================================
+
+AMOSTRAS REGISTADAS (ordem por codigo):
+Cod    Nome                 Local           Mineral        Teor% Prio
+---------------------------------------------------------------
+-1303605847 V                   Huila           Calcario       75.00%  Bxa
+1613571610                     Lunda Norte     Diamante        9.60% Alta
+-1303596070 V                   Benguela        Manganes       43.20%  Med
+-1303594599 V                   Malanje         Diamante       18.50% Alta
+425737920 ’                   Moxico          Ouro            4.80% Alta
+-1303607318 V                   Bie             Cobre          55.70% Alta
+-1303609143 V                   Cuando Cubango  Ferro          62.30%  Med
+425737296 ’                   Huambo          Quartzito      30.00%  Bxa
+310    AM-Cabinda-10        Cabinda         Petroleo       88.10%  Med
+-1303593430 V                   Uige            Cobalto        22.40%  Med
+
+ESTATISTICAS DE DESEMPENHO:
+  Total de amostras : 10
+  Comparacoes BST   : 0
+  Comparacoes AVL   : 0
+  Altura AVL        : 4
+  Comp. Bubble Sort : 0 (Trocas: 0)
+  Comp. Selection   : 0 (Trocas: 0)
+
+REDE LOGISTICA (7 pontos, 8 arestas):
+  [0] Luanda (Lab. Central)           Laboratorio
+  [1] Malanje (Extracao)              Extracao
+  [2] Benguela (Extracao)             Extracao
+  [3] Huambo (Lab. Regional)          Laboratorio
+  [4] Lubango (Extracao)              Extracao
+  [5] Cabinda (Exportacao)            Exportacao
+  [6] Lobito (Exportacao)             Exportacao
+
+=============================================================
