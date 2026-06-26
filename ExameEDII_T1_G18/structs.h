@@ -57,7 +57,7 @@ typedef struct {
 RedeComputadores* criar_rede(int capacidade);
 void cadastrar_usuario(RedeComputadores* rede, int id, char* nome, int limite_caixa);
 void conectar_amigos(RedeComputadores* rede, int id1, int id2);
-int sao_vizinhos_diretos(RedeComputadores* rede, int id1, int id2);
+int sao_amigos_diretos(RedeComputadores* rede, int id1, int id2);
 
 // Funções para trabalhar com as caixas de correio e suas filas.
 void iniciar_caixa(CaixaCorreio* caixa, int limite);
@@ -74,3 +74,11 @@ void exibir_caixas_usuario(RedeComputadores* rede, int id_usuario);
 
 // Função para liberar a memória alocada pela rede.
 void destruir_rede(RedeComputadores* rede);
+
+// Funções para as próximas fases
+int caixa_esta_cheia(CaixaCorreio* caixa);
+int enfileirar_mensagem(CaixaCorreio* caixa, Mensagem msg);
+Mensagem desenfileirar_mensagem(CaixaCorreio* caixa);
+int verificar_se_eh_spam(char* texto, PalavraSpam* dic, int tp, int k);
+void enviar_email(RedeComputadores* r, int rem, int dest, char* t, PalavraSpam* d, int tp, int k);
+void exibir_caixas_usuario(RedeComputadores* r, int id);
